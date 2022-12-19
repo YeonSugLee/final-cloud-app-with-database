@@ -74,15 +74,13 @@
             <!-- <HINT> For each question choice, you may create a checkbox input like
             <input type="check" name="choice_{{choice.id}}" id="{{choice.id}}" ...>
             -->
-
-            <p>
-                <button class="btn btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            {% if user.is_authenticated %}
+                <button class="btn btn-primary btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                   Start Exam
                 </button>
-              </p>
               <div class="collapse" id="collapseExample">
                 <div class="card card-body">
-                    <form id="questionform" action="point to a submit view" method="post">
+                    <form id="questionform" action="{% url 'onlinecourse:submit' course.id %}" method="post">
                         {% for question in course.question_set.all %}
                         <div class="card mt-1">
                             <div class="card-header"><h5>{{ question.question}}</h5></div>
@@ -104,7 +102,7 @@
             </form> 
                 </div>
               </div>
-
+            {% endif %}
             
 
             <!--Check here to see more details Bootstrap checkbox
